@@ -3,5 +3,6 @@
 //
 
 #include "Monster.h"
-Monster::Monster() {}
 
+
+Monster::Monster(int steps, int life, double power) : steps(steps), life(life), power(power) {}

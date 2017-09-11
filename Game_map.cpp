@@ -106,7 +106,7 @@ Game_map::Coordinates Game_map::find_player() { // keep an eye on return type it
 }
 // function that provides coordinates for new move
 
-Game_map::Coordinates Game_map::next_position(Coordinates from, Cmove_direction direction) {
+Game_map::Coordinates Game_map::next_position(Coordinates from, Move_direction direction) {
 
     // using coord to perform one search to get value for x & y, this is better then:
     // size_t x = find_way().x; size_t y = find_way().y; in this line I am preforming search twice
@@ -115,16 +115,16 @@ Game_map::Coordinates Game_map::next_position(Coordinates from, Cmove_direction 
 
     switch (direction){
 
-        case Cmove_direction::up :
+        case Move_direction::up :
             return {x - 1,y};
             //break;
-        case Cmove_direction::down :
+        case Move_direction::down :
             return {x + 1, y};
             //break;
-        case Cmove_direction::right :
+        case Move_direction::right :
             return {x, y + 1};
             //break;
-        case Cmove_direction::left :
+        case Move_direction::left :
             return {x, y - 1};
             //break;
     }
@@ -140,7 +140,7 @@ bool Game_map::is_victory(const Game_map::Coordinates to){
 void Game_map::set_position(Coordinates c, char new_Value){
     map[c.x][c.y] = new_Value;
 }
-void  Game_map::move_player(Cmove_direction direction, int steps,bool* end_game){
+void  Game_map::move_player(Move_direction direction, int steps,bool* end_game){
     Game_map::Coordinates current = find_player();
     while (steps-- > 0){
         Coordinates new_Position = next_position(current, direction);

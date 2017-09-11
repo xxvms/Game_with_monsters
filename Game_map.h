@@ -9,7 +9,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include "Cmove_direction.h"
+#include "Move_direction.h"
 #include "rang.hpp"
 
 
@@ -31,7 +31,7 @@ public:
     Coordinates find_player();
 
     // function that provides coordinates for new move
-    Coordinates next_position(Coordinates from, Cmove_direction direction);
+    Coordinates next_position(Coordinates from, Move_direction direction);
 
     // function to validate move
     bool is_valid_move(Game_map::Coordinates to);
@@ -42,7 +42,7 @@ public:
     // executing user move after move has been verified and its valid
     void set_position(Coordinates c, char new_value);
 
-    void move_player(Cmove_direction direction, int steps, bool* end_game);
+    void move_player(Move_direction direction, int steps, bool* end_game);
 
     // function to print map
     void print_base();

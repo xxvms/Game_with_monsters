@@ -1,7 +1,8 @@
 #include <iostream>
 #include "Game_map.h"
-#include "Cmove_direction.h"
+#include "Move_direction.h"
 #include "rang.hpp"
+#include "Player.h"
 
 int menu(std::string &choice) {
     if (choice == "up") return 1;
@@ -13,7 +14,7 @@ int menu(std::string &choice) {
 
 int steps(){
     int steps = 0;
-    std::cout << "Please provide number of steps min 1 - max 5: ";
+    std::cout << "Please provide number of moves min 1 - max 5: ";
     std::cin >> steps;
     if (steps > 0 && steps < 6)
     {
@@ -28,10 +29,16 @@ bool* pGame_over = &game_over;
 
 int main() {
 
-    Game_map first;
+  /*  Game_map first;
 
     first.print_base();
-    first.find_player();
+    first.find_player();*/
+    Player Mike(5, 20, 40);
+
+    std::cout << "Mike attack: " << Mike.attack() << '\n';
+    std::cout << "Mike defense: " << Mike.defense(5) << '\n';
+
+/*
 
     do {
         std::cout << "Please provide direction (up/down/right/left): ";
@@ -44,7 +51,7 @@ int main() {
                 std::cout << "Going Up " << '\n';
                 Cmove_direction direction_up;
                 direction_up = static_cast<Cmove_direction>(0);
-                auto steps_to_take = steps();
+                auto steps_to_take = moves();
                 first.move_player(direction_up, steps_to_take, pGame_over);
                 break;
             }
@@ -53,7 +60,7 @@ int main() {
                 std::cout << "Going Down" << '\n';
                 Cmove_direction direction_down;
                 direction_down= static_cast<Cmove_direction>(1);
-                auto steps_to_take = steps();
+                auto steps_to_take = moves();
                 first.move_player(direction_down, steps_to_take, pGame_over);
                 break;
             }
@@ -62,7 +69,7 @@ int main() {
                 std::cout << "Going Right" << '\n';
                 Cmove_direction direction_right;
                 direction_right = static_cast<Cmove_direction>(2);
-                auto steps_to_take = steps();
+                auto steps_to_take = moves();
                 first.move_player(direction_right, steps_to_take, pGame_over);
                 break;
             }
@@ -71,7 +78,7 @@ int main() {
                 std::cout << "Going Left" << '\n';
                 Cmove_direction direction_left;
                 direction_left = static_cast<Cmove_direction>(3);
-                auto steps_to_take = steps();
+                auto steps_to_take = moves();
                 first.move_player(direction_left, steps_to_take, pGame_over);
                 break;
             }
@@ -81,6 +88,7 @@ int main() {
                 break;
         }
     } while (*pGame_over); //!first.print_victory() == 1);
+*/
 
     return 0;
 }
