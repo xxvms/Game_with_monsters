@@ -7,7 +7,6 @@
 
 #include <random>
 
-
 class Player {
 private:
     int moves;
@@ -22,8 +21,12 @@ public:
     double attack();
     double defense(double Monster_attack);
 
+    //random numbers generator
     template <class T>
     T random_value_generator(T min_value, T max_Value);
+
+
+
 };
 
 

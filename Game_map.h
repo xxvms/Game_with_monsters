@@ -30,6 +30,8 @@ public:
     // function that allow to find location of the player on the map, variable i allows to find row and result refers to column
     Coordinates find_player();
 
+    Coordinates Pick_Random_FreeSpot();
+
     // function that provides coordinates for new move
     Coordinates next_position(Coordinates from, Move_direction direction);
 

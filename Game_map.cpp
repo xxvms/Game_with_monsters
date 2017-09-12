@@ -89,6 +89,16 @@ void Game_map::print_victory(bool* eng_game){
     }
 }
 
+Game_map::Coordinates Game_map::Pick_Random_FreeSpot(){
+
+    for (size_t i; i < map.at(i).size(); i++)
+        if (map.at(i).size() < 103){
+                    
+        }
+
+}
+
+
 // function that allow to find location of the player on the map, variable i allows to find row and result refers to column
 Game_map::Coordinates Game_map::find_player() { // keep an eye on return type it have Game_map:: !!!!!
     const char player = '@';

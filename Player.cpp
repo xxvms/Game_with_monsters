@@ -29,31 +29,9 @@ T Player::random_value_generator(T min_Value, T max_Value)  {
 // Function that responds to the attack by lowering life by amount of attack and chance of avoiding attack all together
 double Player::defense(double Monster_attack) {
 
-    double percent = (Monster_attack / 100);
+    double percent = (Monster_attack / 100);// todo not finished function to deal with defense
 
 
 
     return life - Monster_attack;
 }
-
-
-
-/*
- * #include <iostream>
-#include <iomanip>
-#include <string>
-#include <map>
-#include <random>
-#include <cmath>
-
-int main()
-{
-    // Seed with a real random value, if available
-    std::random_device r;
-
-    // Choose a random mean between 1 and 6
-    std::default_random_engine e1(r());
-    std::uniform_int_distribution<int> uniform_dist(1, 6);
-    int mean = uniform_dist(e1);
-    std::cout << "Randomly-chosen mean: " << mean << '\n';
- */
