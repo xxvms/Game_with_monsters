@@ -76,7 +76,8 @@ void Game_map::print_base(){
     }
 }
 
-void Game_map::print_victory(bool* eng_game){
+// Function to print message about vicory when user gets to X
+void Game_map::print_victory(bool* end_game){
     std::cout << victory.size() << '\n';
     for (auto& line : victory){
         for (auto& c: line){
@@ -84,18 +85,41 @@ void Game_map::print_victory(bool* eng_game){
                       rang::style::reset;
         }
         std::cout << '\n';
-        *eng_game = false;
+        *end_game = false;
 
     }
 }
 
+
+// function that will provide me with size of Map for placing objects in random places
+Game_map::Coordinates Game_map::size_of_map()const {
+
+    size_t x = map.size()-1;
+    size_t y = map.at(x).size() -1;
+
+    return {x, y};
+}
+
+
+// Function that generates random numbers that can be used after verification to randomly place monsters, users and possibly in future other objects on the map
 Game_map::Coordinates Game_map::Pick_Random_FreeSpot(){
+    size_t min_number = 0;
 
-    for (size_t i; i < map.at(i).size(); i++)
-        if (map.at(i).size() < 103){
-                    
-        }
+    Game_map::Coordinates max_size_of_array = size_of_map();
 
+    size_t maxX = static_cast<int>(max_size_of_array.x);
+    size_t maxY = static_cast<int>(max_size_of_array.y);
+    Game_map::Coordinates randomXY;
+
+    do {
+
+        size_t randomX = random_value_generator(min_number, maxX );
+        size_t randomY = random_value_generator(min_number, maxY);
+        randomXY.x = randomX;
+        randomXY.y = randomY;
+        return {randomX, randomY};
+
+    }while (is_valid_move(randomXY));
 }
 
 
@@ -113,9 +137,9 @@ Game_map::Coordinates Game_map::find_player() { // keep an eye on return type it
         }
         x++;
     }
-}
-// function that provides coordinates for new move
+} //todo warning: control may reach end of non-void function [-Wreturn-type]
 
+// function that provides coordinates for new move
 Game_map::Coordinates Game_map::next_position(Coordinates from, Move_direction direction) {
 
     // using coord to perform one search to get value for x & y, this is better then:
@@ -140,24 +164,34 @@ Game_map::Coordinates Game_map::next_position(Coordinates from, Move_direction d
     }
 }
 
+// function that validate move
 bool Game_map::is_valid_move(const Game_map::Coordinates to) {
     return map[to.x][to.y] == ' ' || map[to.x][to.y] == '.';
 }
+
+// function that is executed on when user gets to X
 bool Game_map::is_victory(const Game_map::Coordinates to){
 
     return map[to.x][to.y] == 'X';
 }
+
+// function that set position
 void Game_map::set_position(Coordinates c, char new_Value){
     map[c.x][c.y] = new_Value;
 }
-void  Game_map::move_player(Move_direction direction, int steps,bool* end_game){
+
+// function that executes move
+void  Game_map::move_player(Move_direction direction, int steps,bool* end_game, Player& my_Player){
     Game_map::Coordinates current = find_player();
     while (steps-- > 0){
         Coordinates new_Position = next_position(current, direction);
-        if (is_victory(new_Position))
+        if (is_victory(new_Position)){
             return print_victory(end_game);
-        else if(!is_valid_move(new_Position))
+        }
+        else if(!is_valid_move(new_Position)) {
             return;
+        }
+        my_Player.player_moves(); // this function decreases value of variable moves type int inside player and is passed as reference - not sure if I need that at all
         set_position(current, '.');
         set_position(new_Position, '@');
         current = new_Position;
@@ -165,4 +199,11 @@ void  Game_map::move_player(Move_direction direction, int steps,bool* end_game){
     }
 }
 
-
+// Random value generator
+template <class T>
+T Game_map::random_value_generator(T x, T y) {
+    std::default_random_engine random_value(random_dev_game());
+    std::uniform_int_distribution<T> values(x, y);
+    int values_to_return = values(random_value);
+    return values_to_return;
+}

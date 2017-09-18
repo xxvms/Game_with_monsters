@@ -18,6 +18,7 @@ public:
     Player(int moves, double life, double attackX);
 
     double read_power();
+    bool is_Player_alive();
     double attack();
     double defense(double Monster_attack);
 
@@ -25,6 +26,9 @@ public:
     template <class T>
     T random_value_generator(T min_value, T max_Value);
 
+    void player_moves();
+
+    int how_many_moves() const;
 
 
 };

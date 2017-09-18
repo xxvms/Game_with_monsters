@@ -11,10 +11,18 @@ double Player::read_power() {
     return life;
 }
 
+bool Player::is_Player_alive(){
+    if (life < 0){
+        return false;
+    } else {
+        return true;
+    }
+}
+
 // function that generates random value in range 1- Max attack value that represetn strenght of an attack
 double Player::attack() {
-    double attack_strenght = random_value_generator(1.0, attackX);
-    return attack_strenght;
+    double attack_strength = random_value_generator(1.0, attackX);
+    return attack_strength;
 }
 
 // Function that the only job is to generate random values for my other functions - attack and defence
@@ -34,4 +42,11 @@ double Player::defense(double Monster_attack) {
 
 
     return life - Monster_attack;
+}
+
+void Player::player_moves() {
+    moves--;
+}
+int Player::how_many_moves() const{
+    return moves;
 }

@@ -4,12 +4,16 @@
 #include "rang.hpp"
 #include "Player.h"
 
+#ifndef __clang__
+#error "Not clang"
+#endif
+
 int menu(std::string &choice) {
     if (choice == "up") return 1;
     if (choice == "down") return 2;
     if (choice == "right") return 3;
     if (choice == "left") return 4;
-}
+} // todo warning: control may reach end of non-void function [-Wreturn-type]
 
 
 int moves(){
@@ -33,28 +37,32 @@ int main() {
 
     first.print_base();
     first.find_player();
+
     Player Mike(5, 20, 10);
-
-    std::cout << "Mike attack: " << Mike.attack() << '\n';
-    std::cout << "Mike defense: " << Mike.defense(5) << '\n';
-
-    Player Monster(5, 20, 3);
-
 
 
     do {
-        std::cout << "Please provide direction (up/down/right/left): ";
+        std::cout << "\n Please provide direction (up/down/right/left): ";
         std::string choice;
         std::cin >> choice;
 
         switch (menu(choice)) {
 
             case 1:{
+                auto is_it_free = first.Pick_Random_FreeSpot();
+                std::cout << "random spot X: " << is_it_free.x << " Y: " << is_it_free.y << '\n';
                 std::cout << "Going Up " << '\n';
                 Move_direction direction_up;
                 direction_up = static_cast<Move_direction>(0);
                 auto steps_to_take = moves();
-                first.move_player(direction_up, steps_to_take, pGame_over);
+                first.move_player(direction_up, steps_to_take, pGame_over, Mike);
+
+                first.size_of_map();
+                auto random = first.Pick_Random_FreeSpot();
+
+                std::cout << "X: " << random.x << " Y: " << random.y;
+
+                Mike.player_moves();
                 break;
             }
 
@@ -63,7 +71,7 @@ int main() {
                 Move_direction direction_down;
                 direction_down= static_cast<Move_direction>(1);
                 auto steps_to_take = moves();
-                first.move_player(direction_down, steps_to_take, pGame_over);
+                first.move_player(direction_down, steps_to_take, pGame_over, Mike);
                 break;
             }
 
@@ -72,7 +80,7 @@ int main() {
                 Move_direction direction_right;
                 direction_right = static_cast<Move_direction>(2);
                 auto steps_to_take = moves();
-                first.move_player(direction_right, steps_to_take, pGame_over);
+                first.move_player(direction_right, steps_to_take, pGame_over, Mike);
                 break;
             }
 
@@ -81,12 +89,13 @@ int main() {
                 Move_direction direction_left;
                 direction_left = static_cast<Move_direction>(3);
                 auto steps_to_take = moves();
-                first.move_player(direction_left, steps_to_take, pGame_over);
+                first.move_player(direction_left, steps_to_take, pGame_over, Mike);
                 break;
             }
 
             default:
                 std::cout << "Not going :( select valid choice!" << '\n';
+                std::cout << "blah blah" << '\n';
                 break;
         }
     } while (*pGame_over);
