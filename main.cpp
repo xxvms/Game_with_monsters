@@ -38,7 +38,7 @@ int main() {
 
     Game_map first;
 
-    first.set_monster();
+    //first.set_monster();
     first.print_base();
     first.find_player();
 
@@ -55,6 +55,7 @@ int main() {
             case 1:{
 
 
+                first.move_monster();
                 std::cout << "Going Up " << '\n';
                 Move_direction direction_up;
                 direction_up = static_cast<Move_direction>(0);
@@ -62,16 +63,14 @@ int main() {
                 first.move_player(direction_up, steps_to_take, pGame_over, Mike);
 
                 first.size_of_map();
-                auto random = first.Pick_Random_FreeSpot();
-                first.move_monster();
 
-                std::cout << "X: " << random.x << " Y: " << random.y;
 
                 Mike.player_moves();
                 break;
             }
 
             case 2:{
+                first.move_monster();
                 std::cout << "Going Down" << '\n';
                 Move_direction direction_down;
                 direction_down= static_cast<Move_direction>(1);
@@ -81,6 +80,7 @@ int main() {
             }
 
             case 3:{
+                first.move_monster();
                 std::cout << "Going Right" << '\n';
                 Move_direction direction_right;
                 direction_right = static_cast<Move_direction>(2);
@@ -90,6 +90,7 @@ int main() {
             }
 
             case 4:{
+                first.move_monster();
                 std::cout << "Going Left" << '\n';
                 Move_direction direction_left;
                 direction_left = static_cast<Move_direction>(3);

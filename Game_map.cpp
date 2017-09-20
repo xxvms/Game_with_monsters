@@ -210,7 +210,7 @@ void Game_map::set_monster(){
 }
 
 // function that will set monster in random spot on map
-void Game_map::move_monster(){ //todo random function I am unable to get direction of monster move yet!!
+void Game_map::move_monster(){ // todo change way that monster is placed randomly on the map and moved from there
 
 
     auto direction = static_cast<Move_direction>(random_value_generator(0, 3));
