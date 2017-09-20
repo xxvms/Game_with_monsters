@@ -101,7 +101,7 @@ Game_map::Coordinates Game_map::size_of_map()const {
 
     return {x, y};
 }
-
+//
 
 // Function that generates random numbers that can be used after verification to randomly place monsters, users and possibly in future other objects on the map
 Game_map::Coordinates Game_map::Pick_Random_FreeSpot(){
