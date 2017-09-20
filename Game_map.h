@@ -41,7 +41,7 @@ public:
     Coordinates Pick_Random_FreeSpot();
 
     // function that provides coordinates for new move
-    Coordinates next_position(Coordinates from, Move_direction direction);
+    Coordinates next_position(Coordinates from, Move_direction directions);
 
     // function to validate move
     bool is_valid_move(Game_map::Coordinates to);
@@ -59,6 +59,12 @@ public:
 
     // Function to print message about victory when user gets to X
     void print_victory(bool* end_game);
+
+    // Function that set monster on map
+    void set_monster();
+
+    // function that will set monster in random spot on map
+    void move_monster();
 
     // Random value generator
     template <class T>

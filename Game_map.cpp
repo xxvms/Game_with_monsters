@@ -60,6 +60,8 @@ rang::fg get_color_for(char c){
             return rang::fg::green;
         case '~':
             return rang::fg::blue;
+        case '%':
+            return rang::fg::yellow;
         default:
             return rang::fg::reset;
     }
@@ -76,7 +78,7 @@ void Game_map::print_base(){
     }
 }
 
-// Function to print message about vicory when user gets to X
+// Function to print message about victory when user gets to X
 void Game_map::print_victory(bool* end_game){
     std::cout << victory.size() << '\n';
     for (auto& line : victory){
@@ -113,8 +115,8 @@ Game_map::Coordinates Game_map::Pick_Random_FreeSpot(){
 
     do {
 
-        size_t randomX = random_value_generator(min_number, maxX );
-        size_t randomY = random_value_generator(min_number, maxY);
+        size_t randomX = random_value_generator(min_number+1, maxX-1);
+        size_t randomY = random_value_generator(min_number+1, maxY-1);
         randomXY.x = randomX;
         randomXY.y = randomY;
         return {randomX, randomY};
@@ -182,6 +184,7 @@ void Game_map::set_position(Coordinates c, char new_Value){
 
 // function that executes move
 void  Game_map::move_player(Move_direction direction, int steps,bool* end_game, Player& my_Player){
+
     Game_map::Coordinates current = find_player();
     while (steps-- > 0){
         Coordinates new_Position = next_position(current, direction);
@@ -199,6 +202,26 @@ void  Game_map::move_player(Move_direction direction, int steps,bool* end_game, 
     }
 }
 
+// Function that set monster on map
+void Game_map::set_monster(){
+
+    Coordinates monster_start_position = Pick_Random_FreeSpot();
+    set_position(monster_start_position, '%');
+}
+
+// function that will set monster in random spot on map
+void Game_map::move_monster(){ //todo random function I am unable to get direction of monster move yet!!
+
+
+    auto direction = static_cast<Move_direction>(random_value_generator(0, 3));
+
+    Game_map::Coordinates current = Pick_Random_FreeSpot();
+    Coordinates new_Position = next_position(current, direction);
+    set_position(current, ' ');
+    set_position(new_Position, '%');
+
+}
+
 // Random value generator
 template <class T>
 T Game_map::random_value_generator(T x, T y) {
@@ -207,3 +230,4 @@ T Game_map::random_value_generator(T x, T y) {
     int values_to_return = values(random_value);
     return values_to_return;
 }
+

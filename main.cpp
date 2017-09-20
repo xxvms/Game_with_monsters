@@ -35,6 +35,7 @@ int main() {
 
     Game_map first;
 
+    first.set_monster();
     first.print_base();
     first.find_player();
 
@@ -49,8 +50,8 @@ int main() {
         switch (menu(choice)) {
 
             case 1:{
-                auto is_it_free = first.Pick_Random_FreeSpot();
-                std::cout << "random spot X: " << is_it_free.x << " Y: " << is_it_free.y << '\n';
+
+
                 std::cout << "Going Up " << '\n';
                 Move_direction direction_up;
                 direction_up = static_cast<Move_direction>(0);
@@ -59,6 +60,7 @@ int main() {
 
                 first.size_of_map();
                 auto random = first.Pick_Random_FreeSpot();
+                first.move_monster();
 
                 std::cout << "X: " << random.x << " Y: " << random.y;
 
