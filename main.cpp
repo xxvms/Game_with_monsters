@@ -38,9 +38,11 @@ int main() {
 
     Game_map first;
 
-    //first.set_monster();
+    std::string monster = "monster";
+    std::string player = "player";
+    first.set_monster();
     first.print_base();
-    first.find_player();
+    first.find_player(player);
 
     Player Mike(5, 20, 10);
 
