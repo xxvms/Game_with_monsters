@@ -61,7 +61,7 @@ rang::fg get_color_for(char c){
         case '~':
             return rang::fg::blue;
         case '%':
-            return rang::fg::yellow;
+            return rang::fg::red;
         default:
             return rang::fg::reset;
     }
@@ -101,7 +101,7 @@ Game_map::Coordinates Game_map::size_of_map()const {
 
     return {x, y};
 }
-//
+
 
 // Function that generates random numbers that can be used after verification to randomly place monsters, users and possibly in future other objects on the map
 Game_map::Coordinates Game_map::Pick_Random_FreeSpot(){
@@ -214,12 +214,16 @@ void Game_map::move_monster(){ //todo random function I am unable to get directi
 
 
     auto direction = static_cast<Move_direction>(random_value_generator(0, 3));
-
     Game_map::Coordinates current = Pick_Random_FreeSpot();
-    Coordinates new_Position = next_position(current, direction);
-    set_position(current, ' ');
-    set_position(new_Position, '%');
+    int steps = 5;
 
+    while (steps-- > 0) {
+
+        Coordinates new_Position = next_position(current, direction);
+        set_position(current, ' ');
+        set_position(new_Position, '%');
+        current = new_Position;
+    }
 }
 
 // Random value generator

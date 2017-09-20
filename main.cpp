@@ -4,9 +4,12 @@
 #include "rang.hpp"
 #include "Player.h"
 
+/*
+
 #ifndef __clang__
 #error "Not clang"
 #endif
+*/
 
 int menu(std::string &choice) {
     if (choice == "up") return 1;
