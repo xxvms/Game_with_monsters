@@ -202,7 +202,7 @@ void  Game_map::move_player(Move_direction direction, int steps,bool* end_game, 
     }
 }
 
-// Function that set monster on map
+// Function that set monster on map at start
 void Game_map::set_monster(){
 
     Coordinates monster_start_position = Pick_Random_FreeSpot();
