@@ -237,7 +237,7 @@ void Game_map::move_monster(){ // todo change way that monster is placed randoml
         if(!is_valid_move(new_Position)){
             return;
         }
-        set_position(current, ' ');
+        set_position(current, '.');
         set_position(new_Position, '%');
         current = new_Position;
     }
