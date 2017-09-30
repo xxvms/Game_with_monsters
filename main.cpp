@@ -24,10 +24,11 @@ int moves(){
 
 };
 
-bool game_over = true;
-bool* pGame_over = &game_over;
-
 int main() {
+
+
+    bool game_over = true;
+    bool* pGame_over = &game_over;
 
     Game_map first;
 
@@ -40,7 +41,7 @@ int main() {
     first.set_monster();
 
     first.print_base();
-    first.find_player(player);
+    first.find_all(player);
 
     Player Mike(5, 20, 10);
 
