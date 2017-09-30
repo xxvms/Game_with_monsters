@@ -50,7 +50,7 @@ int main() {
             case 1:{
 
 
-                first.move_monster();
+                first.move_monster(); // how to add more monsters?
                 std::cout << "Going Up " << '\n';
                 Move_direction direction_up;
                 direction_up = static_cast<Move_direction>(0);
