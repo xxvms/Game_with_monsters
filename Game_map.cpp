@@ -7,13 +7,13 @@
 Game_map::Game_map()  {
     map = {
             "=======================================================================================================",
-            "|   X ###         ~~ ~~                                ###########                                    |  ===========================================",
-            "|                  ~     ###########    ###########                                    ####           |  ||Player stats:     || Monster stats:    ||",
-            "|    ######             ###########   #############        #        #######        #########          |  || Life:            || Life:             ||",
-            "|   ########             ###########    ###########        ###         #######        ######          |  || Steps:           || Steps:            ||",
-            "|   ####                    #####         #######        ######          #######                      |  || Power:           || Power:            ||",
-            "|                   #####                   ###                            ########     #######       |  || Type:            || Type:             ||",
-            "|      ####         ######    ~~~~~~                ########    ######        ######       ######     |  ===========================================",
+            "|   X ###         ~~ ~~                                ###########                                    |",
+            "|                  ~     ###########    ###########                                    ####           |",
+            "|    ######             ###########   #############        #        #######        #########          |",
+            "|   ########             ###########    ###########        ###         #######        ######          |",
+            "|   ####                    #####         #######        ######          #######                      |",
+            "|                   #####                   ###                            ########     #######       |",
+            "|      ####         ######    ~~~~~~                ########    ######        ######       ######     |",
             "|   #########    #######       ~~~~      ########             ##########                      #####   |",
             "|   #########       #######  ~~~     #########            ########           ~~~~~            ######  |",
             "|     #####         #######                          #####               ###   ~~~~~~~                |",
@@ -115,13 +115,14 @@ Game_map::Coordinates Game_map::Pick_Random_FreeSpot(){
 
     do {
 
-        size_t randomX = random_value_generator(min_number+1, maxX-1);
-        size_t randomY = random_value_generator(min_number+1, maxY-1);
+        size_t randomX = random_value_generator(min_number, maxX);
+        size_t randomY = random_value_generator(min_number, maxY);
         randomXY.x = randomX;
         randomXY.y = randomY;
-        return {randomX, randomY};
 
-    }while (is_valid_move(randomXY));
+
+    }while (!is_valid_move(randomXY));
+    return {randomXY};
 }
 
 
@@ -167,16 +168,12 @@ Game_map::Coordinates Game_map::next_position(Coordinates from, Move_direction d
 
         case Move_direction::up :
             return {x - 1,y};
-            //break;
         case Move_direction::down :
             return {x + 1, y};
-            //break;
         case Move_direction::right :
             return {x, y + 1};
-            //break;
         case Move_direction::left :
             return {x, y - 1};
-            //break;
     }
 }
 
