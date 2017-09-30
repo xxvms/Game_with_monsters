@@ -35,9 +35,6 @@ int main() {
     std::string monster = "monster";
     std::string player = "player";
     first.set_monster();
-    first.set_monster();
-    first.set_monster();
-
     first.print_base();
     first.find_all(player);
 
