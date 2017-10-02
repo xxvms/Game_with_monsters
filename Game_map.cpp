@@ -204,11 +204,11 @@ void Game_map::set_position(Coordinates c, char new_Value){
 }
 
 // function that executes move
-/*void  Game_map::move_player(Move_direction direction, int steps,bool* end_game, Player& my_Player){
+void  Game_map::move_player(Move_direction direction, int steps,bool* end_game, Player& my_Player){
     std::string player_type = "player";
-    std::vector<Game_map::Coordinates> current = find_all(player_type);
+    current = find_all(player_type);
     while (steps-- > 0){
-        std::vector<Game_map::Coordinates> new_Position = next_position(current, direction);
+        new_Position = next_position(current, direction);
         if (is_victory(new_Position)){
             return print_victory(end_game);
         }
@@ -221,7 +221,7 @@ void Game_map::set_position(Coordinates c, char new_Value){
         current = new_Position;
         print_base();
     }
-}*/
+}
 
 // Function that set monster on map at start
 void Game_map::set_monster(){
