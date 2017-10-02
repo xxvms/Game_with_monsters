@@ -14,7 +14,7 @@ Game_map::Game_map()  {
             "|   ####                    #####         #######        ######          #######                      |",
             "|                   #####                   ###                            ########     #######       |",
             "|      ####         ######    ~~~~~~                ########    ######        ######       ######     |",
-            "|   #########    #######       ~~~~      ########             ##########                      #####   |",
+            "| @ #########    #######       ~~~~      ########             ##########                      #####   |",
             "|   #########       #######  ~~~     #########            ########           ~~~~~            ######  |",
             "|     #####         #######                          #####               ###   ~~~~~~~                |",
             "|                   ############        ########              ########              ##########        |",
@@ -25,7 +25,7 @@ Game_map::Game_map()  {
             "|   #########             ########                  #####    #############                #####       |",
             "|   #########                 ######                       #######                   #####            |",
             "|                    #######   #########          ######                #########                     |",
-            "|############                                 ############              #####       @                 |",
+            "|############                                 ############              #####                         |",
             "|############                 ##############                ######                       #####        |",
             "|              ~~~   ~~~      ##############                ######                                    |",
             "|               ~~~~~~        ##############                ######            ~~~~~   ~~~~            |",
@@ -40,6 +40,8 @@ Game_map::Game_map()  {
             "=========================================================================================================",
 
     };
+    index_of_all_monsters = {};
+    index_player = {};
 }
 
 rang::fg get_color_for(char c){
@@ -127,7 +129,8 @@ Game_map::Coordinates Game_map::Pick_Random_FreeSpot(){
 
 
 // function that allow to find location of the player on the map, variable i allows to find row and result refers to column
-Game_map::Coordinates Game_map::find_all(std::string player_type) { // keep an eye on return type it have Game_map:: !!!!!
+std::vector<Game_map::Coordinates> Game_map::find_all(std::string player_type) { // keep an eye on return type it have Game_map:: !!!!!
+
    if (player_type == "player") {
        const char player = '@';
        size_t x = 0;
@@ -136,7 +139,11 @@ Game_map::Coordinates Game_map::find_all(std::string player_type) { // keep an e
            const auto result = std::find(row.cbegin(), row.cend(), player);
            if (result < std::end(row)) {
                y = (result - row.cbegin());
-               return {x, y}; // x is column and y is row
+               Coordinates found_xy = {x,y}; // x is column and y is row
+               index_player.push_back(found_xy);
+               for (auto&& e : index_player) std::cout << e;
+
+               return index_player;
            }
            x++;
        }
@@ -148,13 +155,16 @@ Game_map::Coordinates Game_map::find_all(std::string player_type) { // keep an e
            const auto result = std::find(row.cbegin(), row.cend(), player);
            if (result < std::end(row)) {
                y = (result - row.cbegin());
-               return {x, y}; // x is column and y is row
+               Coordinates found_xy = {x, y}; // x is column and y is row
+               index_of_all_monsters.push_back(found_xy);
            }
            x++;
        }
+       return index_of_all_monsters;
    }
 
 } //todo warning: control may reach end of non-void function [-Wreturn-type]
+
 
 // function that provides coordinates for new move
 Game_map::Coordinates Game_map::next_position(Coordinates from, Move_direction direction) {
@@ -194,11 +204,11 @@ void Game_map::set_position(Coordinates c, char new_Value){
 }
 
 // function that executes move
-void  Game_map::move_player(Move_direction direction, int steps,bool* end_game, Player& my_Player){
+/*void  Game_map::move_player(Move_direction direction, int steps,bool* end_game, Player& my_Player){
     std::string player_type = "player";
-    Game_map::Coordinates current = find_all(player_type);
+    std::vector<Game_map::Coordinates> current = find_all(player_type);
     while (steps-- > 0){
-        Coordinates new_Position = next_position(current, direction);
+        std::vector<Game_map::Coordinates> new_Position = next_position(current, direction);
         if (is_victory(new_Position)){
             return print_victory(end_game);
         }
@@ -211,7 +221,7 @@ void  Game_map::move_player(Move_direction direction, int steps,bool* end_game, 
         current = new_Position;
         print_base();
     }
-}
+}*/
 
 // Function that set monster on map at start
 void Game_map::set_monster(){
@@ -221,11 +231,12 @@ void Game_map::set_monster(){
 }
 
 // function that will set monster in random spot on map
+/*
 void Game_map::move_monster(){ // todo change way that monster is placed randomly on the map and moved from there
 
     std::string player_type = "monster";
     auto direction = static_cast<Move_direction>(random_value_generator(0, 3));
-    Game_map::Coordinates current = find_all(player_type);
+    std::vector<Game_map::Coordinates> current = find_all(player_type);
     int steps = 5;
 
     while (steps-- > 0) {
@@ -239,6 +250,7 @@ void Game_map::move_monster(){ // todo change way that monster is placed randoml
         current = new_Position;
     }
 }
+*/
 
 // Random value generator
 template <class T>
@@ -247,5 +259,14 @@ T Game_map::random_value_generator(T x, T y) {
     std::uniform_int_distribution<T> values(x, y);
     int values_to_return = values(random_value);
     return values_to_return;
+}
+
+
+std::ostream &operator<<(std::ostream & out, const Game_map::Coordinates& coordinates) {
+
+
+    out << "x: " << coordinates.x << " Y: " << coordinates.y << '\n';
+    return out;
+
 }
 

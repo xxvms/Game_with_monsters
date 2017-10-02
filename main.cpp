@@ -42,6 +42,7 @@ int main() {
 
     first.print_base();
     first.find_all(player);
+    first.find_all(monster);
 
     Player Mike(5, 20, 10);
 
@@ -56,12 +57,12 @@ int main() {
             case 1:{
 
 
-                first.move_monster(); // how to add more monsters?
+                //first.move_monster(); // how to add more monsters?
                 std::cout << "Going Up " << '\n';
                 Move_direction direction_up;
                 direction_up = static_cast<Move_direction>(0);
                 auto steps_to_take = moves();
-                first.move_player(direction_up, steps_to_take, pGame_over, Mike);
+                //first.move_player(direction_up, steps_to_take, pGame_over, Mike);
 
                 first.size_of_map();
 
@@ -71,32 +72,32 @@ int main() {
             }
 
             case 2:{
-                first.move_monster();
+                //first.move_monster();
                 std::cout << "Going Down" << '\n';
                 Move_direction direction_down;
                 direction_down= static_cast<Move_direction>(1);
                 auto steps_to_take = moves();
-                first.move_player(direction_down, steps_to_take, pGame_over, Mike);
+                //first.move_player(direction_down, steps_to_take, pGame_over, Mike);
                 break;
             }
 
             case 3:{
-                first.move_monster();
+                //first.move_monster();
                 std::cout << "Going Right" << '\n';
                 Move_direction direction_right;
                 direction_right = static_cast<Move_direction>(2);
                 auto steps_to_take = moves();
-                first.move_player(direction_right, steps_to_take, pGame_over, Mike);
+                //first.move_player(direction_right, steps_to_take, pGame_over, Mike);
                 break;
             }
 
             case 4:{
-                first.move_monster();
+                //first.move_monster();
                 std::cout << "Going Left" << '\n';
                 Move_direction direction_left;
                 direction_left = static_cast<Move_direction>(3);
                 auto steps_to_take = moves();
-                first.move_player(direction_left, steps_to_take, pGame_over, Mike);
+                //first.move_player(direction_left, steps_to_take, pGame_over, Mike);
                 break;
             }
 

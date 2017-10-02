@@ -18,24 +18,27 @@
 
 
 class Game_map{
+public:
+    // variables that will be used to find location of the player on map
+    struct  Coordinates  { size_t  x, y; };
 private:
     std::vector<std::string> map;
     std::vector<std::string> victory;
     std::random_device random_dev_game;
+    std::vector<Coordinates> index_of_all_monsters;
+    std::vector<Coordinates> index_player;
+
 
 public:
 
     // default constructor printing map
     Game_map();
 
-    // variables that will be used to find location of the player on map
-    struct  Coordinates  { size_t  x, y; };
-
     // function that will provide me with size of Map for placing objects in random places
     Coordinates size_of_map()const;
 
     // function that allow to find location of the player on the map, variable i allows to find row and result refers to column
-    Coordinates find_all(std::string player_type);
+    std::vector<Game_map::Coordinates> find_all(std::string player_type);
 
     // function that will pick random X and Y for move to be executed if it meets condition
     Coordinates Pick_Random_FreeSpot();
@@ -72,5 +75,8 @@ public:
 
 
 };
+
+std::ostream& operator<< (std::ostream& out, const Game_map::Coordinates& coordinates);
+
 
 #endif //GAME_GAME_MAP_H
