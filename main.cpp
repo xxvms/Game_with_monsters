@@ -32,14 +32,12 @@ int main() {
 
     Game_map first;
 
-    //std::string monster = "%";
-    //std::string player = "@";
-    first.set_monster();
-    first.set_monster();
-    first.set_monster();
-    first.set_monster();
-    first.set_monster();
-    first.set_player(); // set player on the map
+
+    for (size_t i = 0; i < 6; i++){
+        first.set_random('%');
+    }
+
+    first.set_random('@'); // set player on the map
     first.print_base();
     first.find_all('@');
     first.find_all('%');

@@ -130,11 +130,10 @@ Game_map::Coordinates Game_map::Pick_Random_FreeSpot(){
 std::vector<Game_map::Coordinates> Game_map::find_all(char player_type) { // keep an eye on return type it have Game_map:: !!!!!
        index_of_all = {};
        index_of_all.clear();
-       const char player = '%';
        size_t x = 0;
        size_t y = 0;
        for (const auto &row : map) {
-           const auto result = std::find(row.cbegin(), row.cend(), player);
+           const auto result = std::find(row.cbegin(), row.cend(), player_type);
            if (result < std::end(row)) {
                y = (result - row.cbegin());
                Coordinates found_xy = {x, y}; // x is column and y is row
@@ -213,11 +212,11 @@ void Game_map::set_monster(){
     set_position(monster_start_position, '%');
 }
 
-// Function that set monster on map at start - I should optimize this and merge this with  function set monster
-void Game_map::set_player(){
+// function that will set player and monster in random spot on map
+void Game_map::set_random(char player_type){
 
     Coordinates player_start_position = Pick_Random_FreeSpot();
-    set_position(player_start_position, '@');
+    set_position(player_start_position, player_type);
 }
 
 // function that will set monster in random spot on map

@@ -68,8 +68,8 @@ public:
     // function that will set monster in random spot on map
     void move_monster();
 
-    // function that will set player in random spot on map
-    void set_player();
+    // function that will set player and monster in random spot on map
+    void set_random(char player_type);
 
     // Random value generator
     template <class T>
