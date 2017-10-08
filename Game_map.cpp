@@ -40,8 +40,6 @@ Game_map::Game_map()  {
             "=========================================================================================================",
 
     };
-    index_of_all_monsters = {};
-    index_player = {};
 }
 
 rang::fg get_color_for(char c){
@@ -131,7 +129,8 @@ Game_map::Coordinates Game_map::Pick_Random_FreeSpot(){
 // function that allow to find location of the player on the map, variable i allows to find row and result refers to column
 std::vector<Game_map::Coordinates> Game_map::find_all(std::string player_type) { // keep an eye on return type it have Game_map:: !!!!!
 
-   if (player_type == "player") {
+   if (player_type == "@") {
+       index_player = {};
        index_player.clear();
        const char player = '@';
        size_t x = 0;
@@ -148,7 +147,8 @@ std::vector<Game_map::Coordinates> Game_map::find_all(std::string player_type) {
            }
            x++;
        }
-   } else if (player_type == "monster"){
+   } else if (player_type == "%"){
+       index_of_all_monsters = {};
        index_of_all_monsters.clear();
        const char player = '%';
        size_t x = 0;

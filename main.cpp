@@ -32,8 +32,8 @@ int main() {
 
     Game_map first;
 
-    std::string monster = "monster";
-    std::string player = "player";
+    std::string monster = "%";
+    std::string player = "@";
     first.set_monster();
     first.set_monster();
     first.set_monster();
