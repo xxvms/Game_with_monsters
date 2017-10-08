@@ -62,7 +62,7 @@ int main() {
                 Move_direction direction_up;
                 direction_up = static_cast<Move_direction>(0);
                 auto steps_to_take = moves();
-                //first.move_player(direction_up, steps_to_take, pGame_over, Mike);
+                first.move_player(direction_up, steps_to_take, pGame_over, Mike);
 
                 first.size_of_map();
 
@@ -77,7 +77,7 @@ int main() {
                 Move_direction direction_down;
                 direction_down= static_cast<Move_direction>(1);
                 auto steps_to_take = moves();
-                //first.move_player(direction_down, steps_to_take, pGame_over, Mike);
+                first.move_player(direction_down, steps_to_take, pGame_over, Mike);
                 break;
             }
 
@@ -87,7 +87,7 @@ int main() {
                 Move_direction direction_right;
                 direction_right = static_cast<Move_direction>(2);
                 auto steps_to_take = moves();
-                //first.move_player(direction_right, steps_to_take, pGame_over, Mike);
+                first.move_player(direction_right, steps_to_take, pGame_over, Mike);
                 break;
             }
 
@@ -97,7 +97,7 @@ int main() {
                 Move_direction direction_left;
                 direction_left = static_cast<Move_direction>(3);
                 auto steps_to_take = moves();
-                //first.move_player(direction_left, steps_to_take, pGame_over, Mike);
+                first.move_player(direction_left, steps_to_take, pGame_over, Mike);
                 break;
             }
 

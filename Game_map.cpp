@@ -14,10 +14,10 @@ Game_map::Game_map()  {
             "|   ####                    #####         #######        ######          #######                      |",
             "|                   #####                   ###                            ########     #######       |",
             "|      ####         ######    ~~~~~~                ########    ######        ######       ######     |",
-            "| @ #########    #######       ~~~~      ########             ##########                      #####   |",
+            "|   #########    #######       ~~~~      ########             ##########                      #####   |",
             "|   #########       #######  ~~~     #########            ########           ~~~~~            ######  |",
             "|     #####         #######                          #####               ###   ~~~~~~~                |",
-            "|                   ############        ########              ########              ##########        |",
+            "| @                 ############        ########              ########              ##########        |",
             "|########             #############    ######                 ########       #####                    |",
             "|########                             ####       ######          #########           ######           |",
             "|                ######               ###      ######             #######               ######        |",
@@ -141,7 +141,7 @@ std::vector<Game_map::Coordinates> Game_map::find_all(std::string player_type) {
                y = (result - row.cbegin());
                Coordinates found_xy = {x,y}; // x is column and y is row
                index_player.push_back(found_xy);
-               for (auto&& e : index_player) std::cout << e;
+               for (auto&& e : index_player) std::cout << e; // this is rage loop catch anything sort of way could be replaced by auto const&
 
                return index_player;
            }
@@ -195,20 +195,25 @@ bool Game_map::is_valid_move(const Game_map::Coordinates to) {
 // function that is executed on when user gets to X
 bool Game_map::is_victory(const Game_map::Coordinates to){
 
-    return map[to.x][to.y] == 'X';
+    return map.at(to.x).at(to.y) == 'X';
 }
 
 // function that set position
 void Game_map::set_position(Coordinates c, char new_Value){
-    map[c.x][c.y] = new_Value;
+    map.at(c.x).at(c.y) = new_Value;
 }
 
 // function that executes move
 void  Game_map::move_player(Move_direction direction, int steps,bool* end_game, Player& my_Player){
+
     std::string player_type = "player";
-    current = find_all(player_type);
+    auto currentA = find_all(player_type);
+
+    Coordinates current = static_cast<Coordinates>(currentA.at(0));
+    std::cout << "XXX: " << current.x << " YYY: " << current.y;
+    std::cout << '\n';
     while (steps-- > 0){
-        new_Position = next_position(current, direction);
+        Coordinates new_Position = next_position(current, direction);
         if (is_victory(new_Position)){
             return print_victory(end_game);
         }
@@ -217,10 +222,15 @@ void  Game_map::move_player(Move_direction direction, int steps,bool* end_game, 
         }
         my_Player.player_moves(); // this function decreases value of variable moves type int inside player and is passed as reference - not sure if I need that at all
         set_position(current, '.');
+
+        std::cout << "This is X: " << new_Position.x << " This is Y: " << new_Position.y << '\n';
         set_position(new_Position, '@');
         current = new_Position;
-        print_base();
+
+        std::cout << "bottom x: " << current.x << " bottom y: " << current.y << '\n';
     }
+    std::cout << "Outside X: " << current.x << " Outside Y: " << current.y << '\n';
+    print_base();
 }
 
 // Function that set monster on map at start
@@ -236,7 +246,7 @@ void Game_map::move_monster(){ // todo change way that monster is placed randoml
 
     std::string player_type = "monster";
     auto direction = static_cast<Move_direction>(random_value_generator(0, 3));
-    std::vector<Game_map::Coordinates> current = find_all(player_type);
+    Coordinates current = find_all(player_type);
     int steps = 5;
 
     while (steps-- > 0) {

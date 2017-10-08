@@ -47,10 +47,10 @@ public:
     Coordinates next_position(Coordinates from, Move_direction directions);
 
     // function to validate move
-    bool is_valid_move(Game_map::Coordinates to);
+    bool is_valid_move(const Game_map::Coordinates to);
 
     // function to check for victory
-    bool is_victory(Game_map::Coordinates to);
+    bool is_victory(const Game_map::Coordinates to);
 
     // executing user move after move has been verified and its valid
     void set_position(Coordinates c, char new_value);
