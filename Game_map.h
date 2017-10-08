@@ -25,8 +25,7 @@ private:
     std::vector<std::string> map;
     std::vector<std::string> victory;
     std::random_device random_dev_game;
-    std::vector<Coordinates> index_of_all_monsters;
-    std::vector<Coordinates> index_player;
+    std::vector<Coordinates> index_of_all;
 
 
 public:

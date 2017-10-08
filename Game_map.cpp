@@ -128,28 +128,8 @@ Game_map::Coordinates Game_map::Pick_Random_FreeSpot(){
 
 // function that allow to find location of the player on the map, variable i allows to find row and result refers to column
 std::vector<Game_map::Coordinates> Game_map::find_all(char player_type) { // keep an eye on return type it have Game_map:: !!!!!
-
-   if (player_type == '@') {
-       index_player = {};
-       index_player.clear();
-       const char player = '@';
-       size_t x = 0;
-       size_t y = 0;
-       for (const auto &row : map) {
-           const auto result = std::find(row.cbegin(), row.cend(), player);
-           if (result < std::end(row)) {
-               y = (result - row.cbegin());
-               Coordinates found_xy = {x,y}; // x is column and y is row
-               index_player.push_back(found_xy);
-               for (auto&& e : index_player) std::cout << e; // this is rage loop catch anything sort of way could be replaced by auto const&
-
-               return index_player;
-           }
-           x++;
-       }
-   } else if (player_type == '%'){
-       index_of_all_monsters = {};
-       index_of_all_monsters.clear();
+       index_of_all = {};
+       index_of_all.clear();
        const char player = '%';
        size_t x = 0;
        size_t y = 0;
@@ -158,14 +138,13 @@ std::vector<Game_map::Coordinates> Game_map::find_all(char player_type) { // kee
            if (result < std::end(row)) {
                y = (result - row.cbegin());
                Coordinates found_xy = {x, y}; // x is column and y is row
-               index_of_all_monsters.push_back(found_xy);
+               index_of_all.push_back(found_xy);
            }
            x++;
        }
-       return index_of_all_monsters;
+       return index_of_all;
    }
 
-} //todo warning: control may reach end of non-void function [-Wreturn-type]
 
 
 // function that provides coordinates for new move
@@ -223,7 +202,6 @@ void  Game_map::move_player(Move_direction direction, int steps,bool* end_game, 
         set_position(current, '.');
         set_position(new_Position, '@');
         current = new_Position;
-        //current_as_vector.push_back(current);
     }
     print_base();
 }
