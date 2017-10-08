@@ -32,12 +32,17 @@ int main() {
 
     Game_map first;
 
-
+    // setting up monsters in place....
     for (size_t i = 0; i < 6; i++){
         first.set_random('%');
     }
 
-    first.set_random('@'); // set player on the map
+    // setting up exit
+    first.set_random('X');
+
+    // set player on the map
+    first.set_random('@');
+
     first.print_base();
     first.find_all('@');
     first.find_all('%');

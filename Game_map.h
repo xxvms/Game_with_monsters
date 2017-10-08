@@ -62,9 +62,6 @@ public:
     // Function to print message about victory when user gets to X
     void print_victory(bool* end_game);
 
-    // Function that set monster on map
-    void set_monster();
-
     // function that will set monster in random spot on map
     void move_monster();
 

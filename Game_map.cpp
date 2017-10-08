@@ -7,7 +7,7 @@
 Game_map::Game_map()  {
     map = {
             "=======================================================================================================",
-            "|   X ###         ~~ ~~                                ###########                                    |",
+            "|     ###         ~~ ~~                                ###########                                    |",
             "|                  ~     ###########    ###########                                    ####           |",
             "|    ######             ###########   #############        #        #######        #########          |",
             "|   ########             ###########    ###########        ###         #######        ######          |",
@@ -203,13 +203,6 @@ void  Game_map::move_player(Move_direction direction, int steps,bool* end_game, 
         current = new_Position;
     }
     print_base();
-}
-
-// Function that set monster on map at start
-void Game_map::set_monster(){
-
-    Coordinates monster_start_position = Pick_Random_FreeSpot();
-    set_position(monster_start_position, '%');
 }
 
 // function that will set player and monster in random spot on map
