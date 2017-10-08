@@ -38,7 +38,7 @@ public:
     Coordinates size_of_map()const;
 
     // function that allow to find location of the player on the map, variable i allows to find row and result refers to column
-    std::vector<Game_map::Coordinates> find_all(std::string player_type);
+    std::vector<Game_map::Coordinates> find_all(char player_type);
 
     // function that will pick random X and Y for move to be executed if it meets condition
     Coordinates Pick_Random_FreeSpot();

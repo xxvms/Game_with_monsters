@@ -32,8 +32,8 @@ int main() {
 
     Game_map first;
 
-    std::string monster = "%";
-    std::string player = "@";
+    //std::string monster = "%";
+    //std::string player = "@";
     first.set_monster();
     first.set_monster();
     first.set_monster();
@@ -41,8 +41,8 @@ int main() {
     first.set_monster();
     first.set_player(); // set player on the map
     first.print_base();
-    first.find_all(player);
-    first.find_all(monster);
+    first.find_all('@');
+    first.find_all('%');
 
     Player Mike(5, 20, 10);
 

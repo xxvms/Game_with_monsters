@@ -127,9 +127,9 @@ Game_map::Coordinates Game_map::Pick_Random_FreeSpot(){
 
 
 // function that allow to find location of the player on the map, variable i allows to find row and result refers to column
-std::vector<Game_map::Coordinates> Game_map::find_all(std::string player_type) { // keep an eye on return type it have Game_map:: !!!!!
+std::vector<Game_map::Coordinates> Game_map::find_all(char player_type) { // keep an eye on return type it have Game_map:: !!!!!
 
-   if (player_type == "@") {
+   if (player_type == '@') {
        index_player = {};
        index_player.clear();
        const char player = '@';
@@ -147,7 +147,7 @@ std::vector<Game_map::Coordinates> Game_map::find_all(std::string player_type) {
            }
            x++;
        }
-   } else if (player_type == "%"){
+   } else if (player_type == '%'){
        index_of_all_monsters = {};
        index_of_all_monsters.clear();
        const char player = '%';
@@ -208,8 +208,7 @@ void Game_map::set_position(Coordinates c, char new_Value){
 // function that executes move
 void  Game_map::move_player(Move_direction direction, int steps,bool* end_game, Player& my_Player){
 
-    std::string player_type = "player";
-    auto current_as_vector = find_all(player_type);
+    auto current_as_vector = find_all('@');
 
     Coordinates current = static_cast<Coordinates>(current_as_vector.at(0));
     while (steps-- > 0){
@@ -247,10 +246,9 @@ void Game_map::set_player(){
 
 void Game_map::move_monster(){ // todo change way that monster is placed randomly on the map and moved from there
 
-    std::string player_type = "monster";
     auto direction = static_cast<Move_direction>(random_value_generator(0, 3));
 
-    auto current_as_vector = find_all(player_type);
+    auto current_as_vector = find_all('%');
 
     for (size_t i = 0; i < current_as_vector.size(); i++) {
         Coordinates current = static_cast<Coordinates>(current_as_vector.at(i));
