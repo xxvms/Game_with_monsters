@@ -17,7 +17,7 @@ Game_map::Game_map()  {
             "|   #########    #######       ~~~~      ########             ##########                      #####   |",
             "|   #########       #######  ~~~     #########            ########           ~~~~~            ######  |",
             "|     #####         #######                          #####               ###   ~~~~~~~                |",
-            "| @                 ############        ########              ########              ##########        |",
+            "|                   ############        ########              ########              ##########        |",
             "|########             #############    ######                 ########       #####                    |",
             "|########                             ####       ######          #########           ######           |",
             "|                ######               ###      ######             #######               ######        |",
@@ -132,6 +132,7 @@ Game_map::Coordinates Game_map::Pick_Random_FreeSpot(){
 std::vector<Game_map::Coordinates> Game_map::find_all(std::string player_type) { // keep an eye on return type it have Game_map:: !!!!!
 
    if (player_type == "player") {
+       index_player.clear();
        const char player = '@';
        size_t x = 0;
        size_t y = 0;
@@ -148,6 +149,7 @@ std::vector<Game_map::Coordinates> Game_map::find_all(std::string player_type) {
            x++;
        }
    } else if (player_type == "monster"){
+       index_of_all_monsters.clear();
        const char player = '%';
        size_t x = 0;
        size_t y = 0;
@@ -189,7 +191,7 @@ Game_map::Coordinates Game_map::next_position(Coordinates from, Move_direction d
 
 // function that validate move
 bool Game_map::is_valid_move(const Game_map::Coordinates to) {
-    return map[to.x][to.y] == ' ' || map[to.x][to.y] == '.';
+    return map.at(to.x).at(to.y) == ' ' || map[to.x][to.y] == '.';
 }
 
 // function that is executed on when user gets to X
@@ -207,11 +209,9 @@ void Game_map::set_position(Coordinates c, char new_Value){
 void  Game_map::move_player(Move_direction direction, int steps,bool* end_game, Player& my_Player){
 
     std::string player_type = "player";
-    auto currentA = find_all(player_type);
+    auto current_as_vector = find_all(player_type);
 
-    Coordinates current = static_cast<Coordinates>(currentA.at(0));
-    std::cout << "XXX: " << current.x << " YYY: " << current.y;
-    std::cout << '\n';
+    Coordinates current = static_cast<Coordinates>(current_as_vector.at(0));
     while (steps-- > 0){
         Coordinates new_Position = next_position(current, direction);
         if (is_victory(new_Position)){
@@ -222,14 +222,10 @@ void  Game_map::move_player(Move_direction direction, int steps,bool* end_game, 
         }
         my_Player.player_moves(); // this function decreases value of variable moves type int inside player and is passed as reference - not sure if I need that at all
         set_position(current, '.');
-
-        std::cout << "This is X: " << new_Position.x << " This is Y: " << new_Position.y << '\n';
         set_position(new_Position, '@');
         current = new_Position;
-
-        std::cout << "bottom x: " << current.x << " bottom y: " << current.y << '\n';
+        //current_as_vector.push_back(current);
     }
-    std::cout << "Outside X: " << current.x << " Outside Y: " << current.y << '\n';
     print_base();
 }
 
@@ -240,27 +236,39 @@ void Game_map::set_monster(){
     set_position(monster_start_position, '%');
 }
 
+// Function that set monster on map at start - I should optimize this and merge this with  function set monster
+void Game_map::set_player(){
+
+    Coordinates player_start_position = Pick_Random_FreeSpot();
+    set_position(player_start_position, '@');
+}
+
 // function that will set monster in random spot on map
-/*
+
 void Game_map::move_monster(){ // todo change way that monster is placed randomly on the map and moved from there
 
     std::string player_type = "monster";
     auto direction = static_cast<Move_direction>(random_value_generator(0, 3));
-    Coordinates current = find_all(player_type);
-    int steps = 5;
 
-    while (steps-- > 0) {
+    auto current_as_vector = find_all(player_type);
 
-        Coordinates new_Position = next_position(current, direction);
-        if(!is_valid_move(new_Position)){
-            return;
+    for (size_t i = 0; i < current_as_vector.size(); i++) {
+        Coordinates current = static_cast<Coordinates>(current_as_vector.at(i));
+        int steps = 5;
+
+        while (steps-- > 0) {
+
+            Coordinates new_Position = next_position(current, direction);
+            if (!is_valid_move(new_Position)) {
+                return;
+            }
+            set_position(current, '.');
+            set_position(new_Position, '%');
+            current = new_Position;
         }
-        set_position(current, '.');
-        set_position(new_Position, '%');
-        current = new_Position;
     }
 }
-*/
+
 
 // Random value generator
 template <class T>

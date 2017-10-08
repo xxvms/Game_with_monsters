@@ -39,7 +39,7 @@ int main() {
     first.set_monster();
     first.set_monster();
     first.set_monster();
-
+    first.set_player(); // set player on the map
     first.print_base();
     first.find_all(player);
     first.find_all(monster);
@@ -57,7 +57,7 @@ int main() {
             case 1:{
 
 
-                //first.move_monster(); // how to add more monsters?
+                first.move_monster(); // how to add more monsters?
                 std::cout << "Going Up " << '\n';
                 Move_direction direction_up;
                 direction_up = static_cast<Move_direction>(0);
@@ -72,7 +72,7 @@ int main() {
             }
 
             case 2:{
-                //first.move_monster();
+                first.move_monster();
                 std::cout << "Going Down" << '\n';
                 Move_direction direction_down;
                 direction_down= static_cast<Move_direction>(1);
@@ -82,7 +82,7 @@ int main() {
             }
 
             case 3:{
-                //first.move_monster();
+                first.move_monster();
                 std::cout << "Going Right" << '\n';
                 Move_direction direction_right;
                 direction_right = static_cast<Move_direction>(2);
@@ -92,7 +92,7 @@ int main() {
             }
 
             case 4:{
-                //first.move_monster();
+                first.move_monster();
                 std::cout << "Going Left" << '\n';
                 Move_direction direction_left;
                 direction_left = static_cast<Move_direction>(3);
