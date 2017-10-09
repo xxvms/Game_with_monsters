@@ -195,6 +195,7 @@ void  Game_map::move_player(Move_direction direction, int steps,bool* end_game, 
             return print_victory(end_game);
         }
         else if(!is_valid_move(new_Position)) {
+            print_base();
             return;
         }
         my_Player.player_moves(); // this function decreases value of variable moves type int inside player and is passed as reference - not sure if I need that at all
