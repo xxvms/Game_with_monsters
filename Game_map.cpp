@@ -217,11 +217,11 @@ void Game_map::set_random(char player_type){
 
 void Game_map::move_monster(){ // todo change way that monster is placed randomly on the map and moved from there
 
-    auto direction = static_cast<Move_direction>(random_value_generator(0, 3));
 
     auto current_as_vector = find_all('%');
 
     for (size_t i = 0; i < current_as_vector.size(); i++) {
+        auto direction = static_cast<Move_direction>(random_value_generator(0, 3));
         Coordinates current = static_cast<Coordinates>(current_as_vector.at(i));
         int steps = 5;
 
@@ -229,7 +229,7 @@ void Game_map::move_monster(){ // todo change way that monster is placed randoml
 
             Coordinates new_Position = next_position(current, direction);
             if (!is_valid_move(new_Position)) {
-                return;
+                break;
             }
             set_position(current, '.');
             set_position(new_Position, '%');
