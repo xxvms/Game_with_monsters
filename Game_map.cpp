@@ -7,7 +7,7 @@
 Game_map::Game_map()  {
     map = {
             "=======================================================================================================",
-            "|     ###         ~~ ~~                                ###########                                    |",
+            "|     ###         ~~ ~~                % %             ###########                                    |",
             "|                  ~     ###########    ###########                                    ####           |",
             "|    ######             ###########   #############        #        #######        #########          |",
             "|   ########             ###########    ###########        ###         #######        ######          |",
@@ -132,16 +132,24 @@ std::vector<Game_map::Coordinates> Game_map::find_all(char player_type) { // kee
        index_of_all.clear();
        size_t x = 0;
        size_t y = 0;
-       for (const auto &row : map) {
-           const auto result = std::find(row.cbegin(), row.cend(), player_type);
-           if (result < std::end(row)) {
-               y = (result - row.cbegin());
-               Coordinates found_xy = {x, y}; // x is column and y is row
-               index_of_all.push_back(found_xy);
-           }
-           x++;
-       }
-       return index_of_all;
+
+    for (const auto &row : map) {
+
+
+        auto result = std::find(std::begin(row), std::end(row), player_type);
+
+        while (result != std::end(row)) {
+            if (*result == player_type){
+
+                y = (result - std::begin(row));
+                Coordinates found_xy = {x, y};
+                index_of_all.push_back(found_xy);
+            }
+            result++;
+        }
+        x++;
+    }
+    return index_of_all;
    }
 
 

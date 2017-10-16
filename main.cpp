@@ -27,6 +27,7 @@ int moves(){
 int main() {
 
 
+
     bool game_over = true;
     bool* pGame_over = &game_over;
 
@@ -43,10 +44,14 @@ int main() {
     // set player on the map
     first.set_random('@');
 
+    // print map
     first.print_base();
+
+    //finding player and monsters
     first.find_all('@');
     first.find_all('%');
 
+    // assigning values to player Mike at the moment not very useful
     Player Mike(5, 20, 10);
 
 
