@@ -70,7 +70,12 @@ public:
 
     // Random value generator
     template <class T>
-    T random_value_generator(T x, T y);
+    T random_value_generator(T x, T y){
+        std::default_random_engine random_value(random_dev_game());
+        std::uniform_int_distribution<T> values(x, y);
+        int values_to_return = values(random_value);
+        return values_to_return;
+    }
 
 
 };
